@@ -1,0 +1,33 @@
+<h1 class="mb-4">Your Reservations</h1>
+
+<% if @reservations.any? %>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Date & Time</th>
+        <th>Number of People</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.date.strftime('%B %d, %Y %I:%M %p') %></td> <!-- AM/PM format -->
+          <td><%= reservation.num_people %> people</td>
+       
+          <td>
+            <%= button_to 'Cancel', reservation_path(reservation), method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to cancel this reservation?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>You don't have any reservations yet.</p>
+<% end %>
+
+<%= link_to 'Make a Reservation', new_reservation_path, class: 'btn btn-primary mt-3' %>
+
+
+
+

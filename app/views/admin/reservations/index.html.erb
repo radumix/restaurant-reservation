@@ -1,0 +1,60 @@
+<h1 class="mb-4">Admin Dashboard</h1>
+
+<h2 class="mb-4">Reservations</h2>
+<% if @reservations.any? %>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Date</th>
+        <th>User</th>
+        <th>Number of People</th>
+        <th>Contact Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reservations.each do |reservation| %>
+        <tr>
+          <td><%= reservation.date.strftime('%B %d, %Y %H:%M') %></td>
+          <td><%= reservation.user.email %></td>
+          <td><%= reservation.num_people %> people</td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No reservations yet.</p>
+<% end %>
+
+<h2 class="mb-4">Manage Time Slots</h2>
+<%= link_to 'Add New Time Slot', new_admin_time_slot_path, class: 'btn btn-primary mb-3' %>
+
+<% if @time_slots.any? %>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Date and Time</th>
+        <th>Max Tables</th>
+        <th>Max People per Table</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @time_slots.each do |time_slot| %>
+        <tr>
+          <td><%= time_slot.date.strftime('%B %d, %Y %H:%M') %></td>
+          <td><%= time_slot.max_tables %></td>
+          <td><%= time_slot.max_people_per_table %></td>
+          <td>
+            <%= link_to 'Edit', edit_admin_time_slot_path(time_slot), class: 'btn btn-warning' %> |
+            <%= link_to 'Delete', admin_time_slot_path(time_slot), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No time slots available.</p>
+<% end %>
+
+
+

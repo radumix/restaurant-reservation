@@ -1,0 +1,21 @@
+<h2>Manage Time Slots</h2>
+<%= link_to 'Add Time Slot', new_admin_time_slot_path %>
+<table>
+  <tr>
+    <th>Start Time</th>
+    <th>End Time</th>
+    <th>Max Tables</th>
+    <th>Actions</th>
+  </tr>
+  <% @time_slots.each do |slot| %>
+    <tr>
+      <td><%= slot.start_time.strftime('%H:%M') %></td>
+      <td><%= slot.end_time.strftime('%H:%M') %></td>
+      <td><%= slot.max_tables %></td>
+      <td>
+        <%= link_to 'Edit', edit_admin_time_slot_path(slot) %> |
+        <%= link_to 'Delete', admin_time_slot_path(slot), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+</table>

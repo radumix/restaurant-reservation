@@ -1,0 +1,5 @@
+<h1>Reservation Confirmation</h1>
+<p>Dear <%= @user.email %>,</p>
+<p>Your reservation has been confirmed:</p>
+<p>Date and Time: <%= @reservation.date.strftime('%A, %B %d at %H:%M') %></p>
+<p>Number of People: <%= @reservation.num_people %></p>

@@ -1,0 +1,24 @@
+<h1 class="mb-4">New Reservation</h1>
+
+<%= form_for @reservation, class: 'needs-validation' do |f| %>
+  <div class="form-group">
+    <%= f.label :date, 'Reservation Date and Time', class: 'form-label' %>
+    <%= f.datetime_select :date, 
+                          min: Time.now + 2.hours, 
+                          class: 'form-control', 
+                          required: true, 
+                          ampm: true %> <!-- AM/PM format -->
+  </div>
+
+  <div class="form-group">
+    <%= f.label :num_people, 'Number of People', class: 'form-label' %>
+    <%= f.number_field :num_people, class: 'form-control', min: 1, step: 1, required: true %>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.submit 'Submit Reservation', class: 'btn btn-success' %>
+  </div>
+<% end %>
+
+<%= link_to 'Back to Your Reservations', reservations_path, class: 'btn btn-secondary mt-3' %>
