@@ -10,6 +10,11 @@ class ReservationsController < ApplicationController
     @time_slots = TimeSlot.all
   end
 
+  def login
+    @reservation = Reservation.new
+    @time_slots = TimeSlot.all
+  end
+
   #   def create
   #     @reservation = current_user.reservations.build(reservation_params)
   #     if @reservation.save
@@ -43,5 +48,9 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(:date, :num_people)
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    root_path # Replace with the path you want, such as new_user_session_path
   end
 end
